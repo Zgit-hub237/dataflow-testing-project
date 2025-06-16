@@ -1,0 +1,94 @@
+{
+  "name": "dataflow-coverage-demo",
+  "version": "2.0.0",
+  "description": "Démonstration complète des méthodologies de couverture de flux de données (All-Defs, All-Uses, All-DU-Paths)",
+  "main": "src/account-manager.js",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage --verbose",
+    "test:watch": "jest --watch",
+    
+    "test:complete": "jest complete-dataflow-coverage.test.js --verbose",
+    "test:incomplete": "jest incomplete-coverage.test.js --coverage --verbose",
+    "test:comparison": "npm run test:incomplete && echo '\n COMPARAISON AVEC MÉTHODOLOGIE CORRECTE:\n' && npm run test:complete",
+    
+    "demo:all-defs": "echo '++ DÉMONSTRATION ALL-DEFS COVERAGE' && jest complete-dataflow-coverage.test.js --testNamePattern='ALL-DEFS' --verbose",
+    "demo:all-uses": "echo '++ DÉMONSTRATION ALL-USES COVERAGE' && jest complete-dataflow-coverage.test.js --testNamePattern='ALL-USES' --verbose",
+    "demo:all-du-paths": "echo '++ DÉMONSTRATION ALL-DU-PATHS COVERAGE' && jest complete-dataflow-coverage.test.js --testNamePattern='ALL-DU-PATHS' --verbose",
+    "demo:progressive": "npm run demo:all-defs && npm run demo:all-uses && npm run demo:all-du-paths",
+    
+    "analyze:problems": "echo '+- ANALYSE DES PROBLÈMES DE COUVERTURE' && npm run test:incomplete",
+    "analyze:solutions": "echo '++ SOLUTIONS AVEC MÉTHODOLOGIE CORRECTE' && npm run test:complete",
+    "analyze:full": "npm run analyze:problems && npm run analyze:solutions",
+    
+    "presentation": "echo '🎓 PRÉSENTATION COMPLÈTE' && npm run demo:progressive && echo '\n📊 COMPARAISON AVEC APPROCHE DÉFAILLANTE:\n' && npm run analyze:problems"
+  },
+  "keywords": [
+    "testing",
+    "dataflow-testing",
+    "white-box-testing",
+    "coverage",
+    "all-defs-coverage",
+    "all-uses-coverage", 
+    "all-du-paths-coverage",
+    "definition-use-chains",
+    "software-quality",
+    "test-methodology",
+    "code-analysis",
+    "academic-demo",
+    "pedagogical-tool",
+    "jest",
+    "javascript"
+  ],
+  "author": "Démonstration Académique - Couverture de Flux de Données",
+  "license": "MIT",
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/*.test.js"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text",
+      "text-summary", 
+      "lcov",
+      "html",
+      "json"
+    ],
+    "testEnvironment": "node",
+    "verbose": true,
+    "testMatch": [
+      "**/tests/**/*.test.js",
+      "**/?(*.)+(spec|test).js"
+    ],
+    "collectCoverage": false,
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 95,
+        "lines": 90,
+        "statements": 90
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/exemple/dataflow-coverage-demo"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "files": [
+    "src/",
+    "tests/",
+    "README.md"
+  ]
+}
